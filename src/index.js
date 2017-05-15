@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import YTSearch from 'youtube-api-search'
-
+import YTSearch from 'youtube-api-search';
+import VideoList from './Components/video_list';
 import SearchBar from './Components/search_bar';
+import VideoDetail from './Components/video_detail'
 
 // Insert your youtube api key here
 const API_KEY = '';
@@ -13,12 +14,18 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    this.state = {videos: []};
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
     YTSearch({key: API_KEY, term: 'Dogs'}, (videos) => {
       // { videos } is the same as {videos: videos}
       // es6 syntax for when the key value are same
-      this.setState({videos});
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0]
+      });
     });
   }
 
@@ -26,6 +33,11 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
+        <VideoDetail video={this.state.selectedVideo}/>
+        <VideoList
+          onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
+          videos={ this.state.videos }
+        />
       </div>
     );
   }
