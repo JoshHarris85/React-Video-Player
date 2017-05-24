@@ -6,7 +6,7 @@ import SearchBar from './Components/search_bar';
 import VideoDetail from './Components/video_detail'
 
 // Insert your youtube api key here
-const API_KEY = '';
+const API_KEY = 'AIzaSyCSBKHY0AYSZtQS17iccisSL8mPUrEmDJA';
 
 // Create a new Component. This Component should produce some HTML.
 // This is a class. Pass the instance to the dom render
@@ -19,7 +19,11 @@ class App extends Component {
       selectedVideo: null
     };
 
-    YTSearch({key: API_KEY, term: 'Dogs'}, (videos) => {
+    this.videoSearch('surfboards');
+  }
+
+  videoSearch(term){
+    YTSearch({key: API_KEY, term: term}, (videos) => {
       // { videos } is the same as {videos: videos}
       // es6 syntax for when the key value are same
       this.setState({
@@ -32,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
           onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
