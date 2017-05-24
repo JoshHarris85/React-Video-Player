@@ -6,7 +6,7 @@ import SearchBar from './Components/search_bar';
 import VideoDetail from './Components/video_detail'
 
 // Insert your youtube api key here
-const API_KEY = 'AIzaSyCSBKHY0AYSZtQS17iccisSL8mPUrEmDJA';
+const API_KEY = '';
 
 // Create a new Component. This Component should produce some HTML.
 // This is a class. Pass the instance to the dom render
